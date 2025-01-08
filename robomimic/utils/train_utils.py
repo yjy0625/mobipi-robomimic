@@ -266,6 +266,7 @@ def run_rollout(
         video_writer=None,
         video_skip=5,
         terminate_on_success=False,
+        reset_before_rollout=True
     ):
     """
     Runs a rollout in an environment with the current network parameters.
@@ -296,7 +297,10 @@ def run_rollout(
 
     batched = isinstance(env, SubprocVectorEnv)
 
-    ob_dict = env.reset()
+    if reset_before_rollout:
+        ob_dict = env.reset()
+    else:
+        ob_dict = env._get_stacked_obs_from_history()
     policy.start_episode(lang=env._ep_lang_str)
 
     goal_dict = None
@@ -468,6 +472,7 @@ def rollout_with_stats(
         epoch=None,
         video_skip=5,
         terminate_on_success=False,
+        reset_before_rollout=True,
         verbose=False,
         del_envs_after_rollouts=False,
         data_logger=None,
@@ -567,6 +572,7 @@ def rollout_with_stats(
                     video_writer=env_video_writer,
                     video_skip=video_skip,
                     terminate_on_success=terminate_on_success,
+                    reset_before_rollout=reset_before_rollout,
                 )
             except Exception as e:
                 print("Rollout exception at episode number {}!".format(ep_i))

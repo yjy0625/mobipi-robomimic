@@ -681,6 +681,14 @@ class RolloutPolicy(object):
         ob = self._prepare_observation(ob, batched=batched)
         if goal is not None:
             goal = self._prepare_observation(goal, batched=batched)
+        # for key in ['robot0_agentview_left_image', 'robot0_agentview_right_image', 'robot0_eye_in_hand_image']:
+        #     ob[key] *= 0
+        #     if "left" in key:
+        #         ob[key] += 0.40
+        #     elif "right" in key:
+        #         ob[key] += 0.5
+        #     else:
+        #         ob[key] += 0.35
         ac = self.policy.get_action(obs_dict=ob, goal_dict=goal)
         if not batched:
             ac = ac[0]
