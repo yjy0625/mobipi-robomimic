@@ -189,7 +189,6 @@ def create_env_from_metadata(
     render=False, 
     render_offscreen=False, 
     use_image_obs=False,
-    seed=None,
 ):
     """
     Create environment.
@@ -221,9 +220,6 @@ def create_env_from_metadata(
     env_kwargs = env_meta["env_kwargs"]
     env_kwargs["env_name"] = env_name
     env_lang = env_meta.get("env_lang", None)
-
-    if seed is not None:
-        env_kwargs["seed"] = seed
 
     env = create_env(
         env_type=env_type,
