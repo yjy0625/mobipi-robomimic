@@ -14,33 +14,12 @@ def make_generator_helper(args):
     ### Define dataset variants to train on ###
     generator.add_param(
         key="train.data",
-        name="TurnOnSinkFaucet",
+        name="TurnOnMicrowave",
         group=123456,
         values_and_names=[
-            # (get_robocasa_ds("CloseSingleDoor", src="human", eval=["CloseSingleDoor"], filter_key="50_demos"), "human-50"), # training on human datasets
-            (get_robocasa_ds("TurnOnSinkFaucet", src="mg", eval=["TurnOnSinkFaucet"], filter_key="50_demos"), "mg-50"), # training on MimicGen datasets
-
-            # composite tasks
-            # (get_robocasa_ds("ArrangeVegetables", filter_key="50_demos"), "ArrangeVegetables"),
-            # (get_robocasa_ds("MicrowaveThawing", filter_key="50_demos"), "MicrowaveThawing"),
-            # (get_robocasa_ds("RestockPantry", filter_key="50_demos"), "RestockPantry"),
-            # (get_robocasa_ds("PreSoakPan", filter_key="50_demos"), "PreSoakPan"),
-            # (get_robocasa_ds("PrepareCoffee", filter_key="50_demos"), "PrepareCoffee"),
+            (get_robocasa_ds("TurnOnMicrowave", src="mg", eval=["TurnOnMicrowave"], filter_key="300_demos"), "mg-300"), # training on MimicGen datasets
         ]
     )
-
-    """
-    ### Uncomment this code to fine-tune on existing checkpoint ###
-    generator.add_param(
-        key="experiment.ckpt_path",
-        name="ckpt",
-        group=1389,
-        values_and_names=[
-            (None, "none"),
-            # ("set checkpoint pth path here", "trained-ckpt"),
-        ],
-    )
-    """
 
     generator.add_param(
         key="train.output_dir",
