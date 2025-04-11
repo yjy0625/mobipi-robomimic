@@ -298,8 +298,7 @@ def extract_multiple_trajectories_with_error(process_num, current_work_array, wo
         env_meta = FileUtils.get_env_metadata_from_dataset(dataset_path=args.dataset)
     if args.generative_textures:
         env_meta["env_kwargs"]["generative_textures"] = "100p"
-    if args.randomize_cameras:
-        env_meta["env_kwargs"]["randomize_cameras"] = True
+    env_meta["env_kwargs"]["randomize_cameras"] = args.randomize_cameras
     env = EnvUtils.create_env_for_data_processing(
         env_meta=env_meta,
         camera_names=args.camera_names, 
@@ -412,7 +411,7 @@ def dataset_states_to_obs_multiprocessing(args):
             output_name = os.path.basename(args.dataset)[:-5] + "_ld.hdf5"
         else:
             image_suffix = str(args.camera_width)
-            image_suffix = image_suffix + "_randcams" if args.randomize_cameras else image_suffix
+            image_suffix = (image_suffix + "_randcams") if args.randomize_cameras else (image_suffix + "_imfixview")
             if args.generative_textures:
                 output_name = os.path.basename(args.dataset)[:-5] + "_gentex_im{}.hdf5".format(image_suffix)
             else:
