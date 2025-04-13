@@ -2,32 +2,25 @@ from robomimic.scripts.config_gen.config_gen_utils import *
 
 
 def make_generator_helper(args):
-    algo_name_short = "act"
+    algo_name_short = "bc_xfmr"
+
     generator = get_generator(
-        algo_name="act",
-        config_file=os.path.join(base_path, 'robomimic/exps/templates/act.json'),
+        algo_name="bc_xfmr",
+        config_file=os.path.join(base_path, 'robomimic/exps/templates/bc_transformer.json'),
         args=args,
         algo_name_short=algo_name_short,
     )
 
-    if args.env == "robocasa":
-        raise NotImplementedError
-    else:
-        raise ValueError
-    
+    ### Define dataset variants to train on ###
     generator.add_param(
-        key="train.batch_size",
-        name="",
-        group=-1,
-        values=[64],
+        key="train.data",
+        name="CloseDrawer",
+        group=123456,
+        values_and_names=[
+            (get_robocasa_ds("CloseDrawer", src="mg_fixview", eval=["CloseDrawer"], filter_key="300_demos"), "mg-300"), # training on MimicGen datasets
+        ]
     )
-    generator.add_param(
-        key="train.max_grad_norm",
-        name="",
-        group=-1,
-        values=[100.0],
-    )
-    
+
     generator.add_param(
         key="train.output_dir",
         name="",
