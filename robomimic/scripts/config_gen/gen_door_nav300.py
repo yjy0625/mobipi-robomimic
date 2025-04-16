@@ -17,15 +17,20 @@ def make_generator_helper(args):
         name="CloseSingleDoor",
         group=123456,
         values_and_names=[
-            (get_robocasa_ds("CloseSingleDoor", src="mg_fixview", eval=[], filter_key="300_demos"), "mg-300-nav"), # training on MimicGen datasets
+            (get_robocasa_ds("CloseSingleDoor", src="mg_fixview", eval=[],
+                             filter_key="300_demos"), "mg-300-nav")
         ]
+    )
+
+    generator.add_param(
+        key="train."
     )
 
     generator.add_param(
         key="train.output_dir",
         name="",
         group=-1,
-        values=[get_output_dir(args, algo_dir=algo_name_short)]
+        values=[get_output_dir(args, algo_dir=algo_name_short + "_nav")]
     )
 
     return generator
