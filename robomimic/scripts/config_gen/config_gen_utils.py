@@ -460,7 +460,10 @@ def get_robocasa_ds(
 
         # set path and horizon
         cfg["path"] = ds_path
-        cfg["horizon"] = all_datasets[name]["horizon"]
+        if "nav" in ds_type:
+            cfg["horizon"] = 800
+        else:
+            cfg["horizon"] = all_datasets[name]["horizon"]
         
         # determine whether we are performing eval on dataset
         if eval is None or name in eval:
