@@ -460,7 +460,7 @@ def get_robocasa_ds(
 
         # set path and horizon
         cfg["path"] = ds_path
-        if "nav" in ds_type:
+        if "nav" in src:
             cfg["horizon"] = 800
         else:
             cfg["horizon"] = all_datasets[name]["horizon"]
