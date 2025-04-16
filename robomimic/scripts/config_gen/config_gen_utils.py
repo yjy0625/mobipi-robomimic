@@ -435,7 +435,7 @@ def get_robocasa_ds(
     ):
     from robocasa.utils.dataset_registry import get_ds_path, SINGLE_STAGE_TASK_DATASETS, MULTI_STAGE_TASK_DATASETS
 
-    assert src in ["human", "mg", "mg_fixview"]
+    assert src in ["human", "mg", "mg_fixview", "mg_nav_fixview"]
 
     all_datasets = {}
     all_datasets.update(SINGLE_STAGE_TASK_DATASETS)
