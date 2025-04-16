@@ -17,13 +17,9 @@ def make_generator_helper(args):
         name="CloseSingleDoor",
         group=123456,
         values_and_names=[
-            (get_robocasa_ds("CloseSingleDoor", src="mg_fixview", eval=[],
+            (get_robocasa_ds("CloseSingleDoor", src="mg_nav_fixview", eval=[],
                              filter_key="300_demos"), "mg-300-nav")
         ]
-    )
-
-    generator.add_param(
-        key="train."
     )
 
     generator.add_param(
